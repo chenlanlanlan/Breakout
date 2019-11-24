@@ -1,17 +1,10 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-#include <SFML/System.hpp>
-#include <SFML/OpenGL.hpp>
-#include <SFML/Main.hpp>
+#include "Paddle.h"
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(768, 500), "Breakout!");
 
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	Paddle paddle;
 
 	while (window.isOpen())
 	{
@@ -23,7 +16,7 @@ int main()
 		}
 
 		window.clear();
-		window.draw(shape);
+		paddle.drawPaddle(window);
 		window.display();
 	}
 
