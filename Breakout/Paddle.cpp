@@ -9,10 +9,12 @@ Paddle::Paddle()
 	origin = paddleSize / 2.f;
 	paddleTexture.loadFromFile(PADDLE_TEXTURE_PATH);
 	paddle.setTexture(&paddleTexture);
+	paddle.setOutlineColor(Color::Black);
+	paddle.setOutlineThickness(2);
 	position = Vector2f(PADDLE_X, PADDLE_Y);
 	paddle.setPosition(position);
-
-	std::cout << "x: " << position.x << "y: " << position.y << std::endl;
+	sb.loadFromFile(PADDLE_SOUND_PATH);
+	paddleSound.setBuffer(sb);
 }
 
 void Paddle::drawPaddle(RenderWindow& window)
@@ -58,7 +60,7 @@ void Paddle::moveRight(int x)
 void Paddle::moveRight(Time dt)
 {
 	velocity.x = SPEED * dt.asSeconds();
-	//std::cout << "move right" << std::endl;
+	std::cout << "move right" << std::endl;
 	paddle.move(velocity.x, 0);
 	if (isCollideRight()) {
 		paddle.setPosition(640.f - (origin.x * 2), PADDLE_Y);
@@ -69,7 +71,7 @@ void Paddle::moveLeft(Time dt)
 {
 	velocity.x = -SPEED * dt.asSeconds();
 	paddle.move(velocity.x, 0);
-	//std::cout << "move left" << std::endl;
+	std::cout << "move left" << std::endl;
 	if (isCollideLeft()) {
 		paddle.setPosition(paddle.getOrigin().x, PADDLE_Y);
 	}
@@ -77,8 +79,7 @@ void Paddle::moveLeft(Time dt)
 
 void Paddle::moveLeft(int x)
 {
-	std::cout << "move left" << std::endl;
-	paddle.setPosition(x-origin.x, PADDLE_Y);
+	paddle.setPosition(x, PADDLE_Y);
 	if (isCollideLeft()) {
 		paddle.setPosition(paddle.getOrigin().x, PADDLE_Y);
 	}
@@ -89,18 +90,36 @@ bool Paddle::isCollideLeft()
 	Vector2f pos = paddle.getPosition();
 	//std::cout << "pos_x: " << pos.x << std::endl;
 	if (pos.x + origin.x < origin.x) {
-		std::cout << "COLLIDE LEFT" << std::endl;
 		return true;
 	
 	}
 	return false;
 }
 
+int Paddle::getHeight()
+{
+	return paddleSize.y;
+}
+
+int Paddle::getWidth()
+{
+	return paddleSize.x;
+}
+
+Vector2f Paddle::getPaddlePosition()
+{
+	return paddle.getPosition();
+}
+
+void Paddle::onCollision()
+{
+	paddleSound.play();
+}
+
 bool Paddle::isCollideRight()
 {
 	Vector2f pos = paddle.getPosition();
 	if (pos.x + (origin.x*2) > 640) {
-		std::cout << "COLLIDE RIGHT" << std::endl;
 		return true;
 	}
 	return false;

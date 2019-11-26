@@ -5,12 +5,13 @@
 #include <stdlib.h>   
 #include <time.h> 
 
-#define SPEED 350.F
-#define PADDLEHEIGHT 20.F
+#define SPEED 400.F
+#define PADDLEHEIGHT 15.F
 #define PADDLEWIDTH 100.F
 #define PADDLE_TEXTURE_PATH "images/paddleImage.png"
+#define PADDLE_SOUND_PATH "assets/impact4.wav"
 #define PADDLE_X 270.f
-#define PADDLE_Y 480.f
+#define PADDLE_Y 680.f
 
 
 using namespace sf;
@@ -30,8 +31,13 @@ public:
 	void moveRight(int x);
 	void moveLeft(Time dt);
 	void moveLeft(int x);
+	void onCollision();
 	bool isCollideRight();
 	bool isCollideLeft();
+	int getHeight();
+	int getWidth();
+	Vector2f getPaddlePosition();
+
 	
 private:
 
