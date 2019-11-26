@@ -3,7 +3,7 @@
 
 Ball::Ball()
 {
-	this->direction = Vector2f(0.f, 1.f); //goes up 
+	this->direction = Vector2f(0.f, 2.f); //goes up 
 	this->radius = 15.f;
 	this->position = Vector2f(PADDLE_X + 50.f, PADDLE_Y - radius);
 	this->origin = Vector2f(radius, radius);
@@ -14,7 +14,6 @@ Ball::Ball()
 	ball.setPosition(position);
 	ball.setTexture(&ball_texture);
 }
-
 
 void Ball::drawBall(RenderWindow& window)
 {

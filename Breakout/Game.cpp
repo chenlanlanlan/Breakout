@@ -8,6 +8,7 @@ ball(),
 font(),
 lifeCount()
 {
+	level = 1;
 	this->game_window.setVerticalSyncEnabled(true);
 	this->game_window.setFramerateLimit(60);
 	//set background
@@ -17,7 +18,6 @@ lifeCount()
 	lifeCount = 3;
 	scoreCount = 0;
 	brickCount = 0;
-	level = 1;
 	setText(gameName, 36, Vector2f(100.f, 200.f), "230 - BREAKOUT! ");
 	setText(instruction, 18, Vector2f(100.f, 250.f), "Press Space to Start,\nand Press Space or \nclick left mouse button to lanuch the ball!");
 	setText(scoreTitle, FONTSIZE, Vector2f(100.f, 5.f), "Score: ");
