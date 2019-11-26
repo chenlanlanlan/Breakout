@@ -6,10 +6,10 @@
 #include <time.h> 
 
 #define SPEED 350.F
-#define PADDLEHEIGHT 100.F
-#define PADDLEWIDTH 20.F
+#define PADDLEHEIGHT 20.F
+#define PADDLEWIDTH 100.F
 #define PADDLE_TEXTURE_PATH "images/paddleImage.png"
-#define PADDLE_X 334.f
+#define PADDLE_X 270.f
 #define PADDLE_Y 480.f
 
 
@@ -24,17 +24,19 @@ public:
 
 	Paddle();
 	void drawPaddle(RenderWindow& window);
-	void player_mouseInput();
-	void player_keyboardInput();
-	void moveRight();
-	void moveLeft();
-	void updatePlayer();
+	void player_mouseInput(int x, Time dt);
+	void player_keyboardInput(Keyboard::Key key, Time dt);
+	void moveRight(Time dt);
+	void moveRight(int x);
+	void moveLeft(Time dt);
+	void moveLeft(int x);
 	bool isCollideRight();
-	bool isCollideleft();
+	bool isCollideLeft();
 	
 private:
 
 	Vector2f position;
+	Vector2f velocity;
 	Vector2f origin;
 	Vector2f paddleSize;
 	SoundBuffer sb;
